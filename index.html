@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vladyslav Arseniuk — Senior iOS Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1c1d28;
+    --panel: #25273a;
+    --panel-alt: #2c2e44;
+    --border: #3a3d57;
+    --text: #edeef5;
+    --text-muted: #8c90ac;
+    --purple: #c9a0ff;
+    --cyan: #6ad3e8;
+    --peach: #ff9580;
+    --gold: #ffd479;
+    --accent: #ff8a4c;
+    --green: #6fe6a1;
+    --mono: "JetBrains Mono", monospace;
+    --sans: "Inter", sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(255,138,76,0.07), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(106,211,232,0.06), transparent 40%);
+  }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ---------- Hero / Xcode window ---------- */
+  .window{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+
+  .titlebar{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--panel-alt);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .traffic{
+    display: flex;
+    gap: 8px;
+  }
+
+  .traffic span{
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .traffic .red{ background: #ff5f57; }
+  .traffic .yellow{ background: #febc2e; }
+  .traffic .green{ background: #28c840; }
+
+  .tab{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    padding: 5px 14px;
+    margin-bottom: -13px;
+  }
+
+  .tab .dot{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---------- Hero (plain) ---------- */
+  .hero-plain{
+    padding: 44px 32px 40px;
+  }
+
+  .hero-eyebrow{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-plain h1{
+    font-family: var(--sans);
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-role{
+    font-size: 17px;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+
+  .hero-role .dot-sep{
+    color: var(--text-muted);
+    font-weight: 400;
+    margin: 0 2px;
+  }
+
+  .hero-tagline{
+    font-size: 16px;
+    color: var(--text);
+    max-width: 620px;
+    margin: 0 0 22px;
+  }
+
+  .hero-meta{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .hero-meta .meta-sep{
+    color: var(--border);
+  }
+
+  .code-body{
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    padding: 24px 0;
+    overflow-x: auto;
+  }
+
+  .line-numbers{
+    text-align: right;
+    padding-right: 14px;
+    color: #4a4d6b;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.9;
+    user-select: none;
+    border-right: 1px solid var(--border);
+  }
+
+  pre.code{
+    margin: 0;
+    padding: 0 24px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.9;
+    white-space: pre;
+  }
+
+  .kw{ color: var(--purple); }
+  .type{ color: var(--cyan); }
+  .str{ color: var(--peach); }
+  .num{ color: var(--gold); }
+  .prop{ color: var(--text); }
+  .com{ color: var(--text-muted); font-style: italic; }
+  .fn{ color: var(--accent); }
+
+  .cursor{
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation: none; opacity: 1; }
+  }
+  @keyframes blink{ 50% { opacity: 0; } }
+
+  .statusbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--panel-alt);
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .statusbar .build{
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .statusbar .build::before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* ---------- Section headers (MARK style) ---------- */
+  .mark{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin: 64px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mark::before{ content: "//"; color: var(--accent); }
+
+  .mark .label{
+    color: var(--text);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.01em;
+  }
+
+  .mark::after{
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  section{
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  section.visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    section{ opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- About ---------- */
+  .about p{
+    font-size: 16px;
+    color: var(--text);
+    max-width: 720px;
+  }
+  .about p + p{ margin-top: 14px; }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 18px 16px;
+  }
+
+  .skill-card h3{
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: var(--cyan);
+  }
+
+  .skill-card h3 .kw{ color: var(--purple); }
+
+  .tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag{
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 4px 9px;
+    border-radius: 5px;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  /* color rotation per category */
+  .skill-card:nth-of-type(1) h3{ color: var(--cyan); }
+  .skill-card:nth-of-type(2) h3{ color: var(--purple); }
+  .skill-card:nth-of-type(3) h3{ color: var(--peach); }
+  .skill-card:nth-of-type(4) h3{ color: var(--gold); }
+  .skill-card:nth-of-type(5) h3{ color: var(--accent); }
+
+  /* ---------- Experience timeline ---------- */
+  .timeline{
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid var(--border);
+  }
+
+  .job{
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .job:last-child{ padding-bottom: 0; }
+
+  .job::before{
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+
+  .job-head{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .job-role{
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .job-company{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--cyan);
+  }
+
+  .job-dates{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .job-summary{
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 4px 0 10px;
+  }
+
+  .job ul{
+    margin: 0 0 10px;
+    padding-left: 20px;
+  }
+  .job li{
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+
+  .sub-client{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--gold);
+    margin: 14px 0 4px;
+  }
+  .sub-client::before{ content: "▸ "; color: var(--accent); }
+
+  .job-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  /* ---------- Education ---------- */
+  .edu-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .edu-card{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .edu-card .eyebrow{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--purple);
+    margin-bottom: 6px;
+  }
+  .edu-card .title{
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .edu-card .sub{
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* ---------- Contact / footer ---------- */
+  .terminal{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .terminal .titlebar{ padding: 10px 16px; }
+  .terminal .titlebar .name{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .term-body{
+    padding: 22px 24px 26px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .term-line{
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .term-line:last-child{ margin-bottom: 0; }
+  .prompt{ color: var(--green); }
+  .term-cmd{ color: var(--text-muted); }
+  .term-line a{
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .term-line a:hover,
+  .term-line a:focus-visible{
+    border-color: var(--accent);
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  footer.note{
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    margin-top: 56px;
+  }
+
+  @media (max-width: 640px){
+    .wrap{ padding: 28px 16px 64px; }
+    .hero-plain{ padding: 32px 20px 28px; }
+    .hero-plain h1{ font-size: 32px; }
+    .hero-role{ font-size: 15px; }
+    .code-body{ grid-template-columns: 28px 1fr; }
+    pre.code{ font-size: 12.5px; padding: 0 14px; }
+    .line-numbers{ font-size: 12.5px; }
+    .mark .label{ font-size: 18px; }
+    .job-dates{ margin-left: 0; }
+    .timeline{ padding-left: 22px; }
+    .job::before{ left: -28px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <div class="window">
+    <div class="titlebar">
+      <div class="traffic">
+        <span class="red"></span><span class="yellow"></span><span class="green"></span>
+      </div>
+      <div class="tab"><span class="dot"></span>VladyslavArseniuk.swift</div>
+    </div>
+    <div class="hero-plain">
+      <p class="hero-eyebrow"><span class="com">//</span> iOS Developer Portfolio</p>
+      <h1>Vladyslav Arseniuk</h1>
+      <p class="hero-role">Senior iOS Engineer <span class="dot-sep">·</span> Mobile Architecture <span class="dot-sep">·</span> Product Delivery</p>
+      <p class="hero-tagline">
+        7+ years building consumer apps for e-commerce, payments, logistics, and social
+        platforms &mdash; from Nike and Macy's to fast-moving startups.
+      </p>
+      <div class="hero-meta">
+        <span>Based in Ukraine</span>
+        <span class="meta-sep">/</span>
+        <span>Swift &amp; SwiftUI</span>
+        <span class="meta-sep">/</span>
+        <span>Available for contract &amp; full-time roles</span>
+      </div>
+    </div>
+    <div class="statusbar">
+      <span class="build">Build Succeeded</span>
+      <span>Ready · iOS 18 · Swift 6</span>
+    </div>
+  </div>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about">
+    <div class="mark"><span class="label">About</span></div>
+    <p>
+      I'm a Senior iOS Engineer with 7+ years of commercial experience building consumer-facing
+      apps across e-commerce, payments, logistics, and social platforms. I've worked across the
+      full product lifecycle &mdash; from early discovery and architecture decisions through
+      implementation, testing, and release.
+    </p>
+    <p>
+      I'm comfortable in Swift, UIKit, and SwiftUI, with a strong focus on modular architecture,
+      modernizing legacy codebases, performance tuning, and mentoring other engineers. I've
+      contributed to products used by Nike, Macy's, and JCPenney, and I'm used to working closely
+      with clients, product owners, designers, and backend teams in distributed setups.
+    </p>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section class="skills">
+    <div class="mark"><span class="label">Skills</span></div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h3><span class="kw">enum</span> iOSEngineering</h3>
+        <div class="tags">
+          <span class="tag">Swift</span>
+          <span class="tag">Objective-C</span>
+          <span class="tag">SwiftUI</span>
+          <span class="tag">UIKit</span>
+          <span class="tag">Auto Layout</span>
+          <span class="tag">Core Animation</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3><span class="kw">enum</span> Architecture</h3>
+        <div class="tags">
+          <span class="tag">Modular Architecture</span>
+          <span class="tag">MVVM + Coordinator</span>
+          <span class="tag">VIPER</span>
+          <span class="tag">Clean Architecture</span>
+          <span class="tag">SOLID</span>
+          <span class="tag">Design Patterns</span>
+          <span class="tag">Dependency Injection</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3><span class="kw">enum</span> PlatformAndData</h3>
+        <div class="tags">
+          <span class="tag">Swift Concurrency</span>
+          <span class="tag">Combine</span>
+          <span class="tag">URLSession</span>
+          <span class="tag">REST</span>
+          <span class="tag">GraphQL</span>
+          <span class="tag">Core Data</span>
+          <span class="tag">Realm</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Keychain</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3><span class="kw">enum</span> QualityAndDelivery</h3>
+        <div class="tags">
+          <span class="tag">XCTest</span>
+          <span class="tag">Snapshot Testing</span>
+          <span class="tag">Instruments</span>
+          <span class="tag">Tuist</span>
+          <span class="tag">Fastlane</span>
+          <span class="tag">Xcode Cloud</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Bitrise</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3><span class="kw">enum</span> Leadership</h3>
+        <div class="tags">
+          <span class="tag">Technical Planning</span>
+          <span class="tag">Estimation</span>
+          <span class="tag">Mentoring</span>
+          <span class="tag">Code Review</span>
+          <span class="tag">POCs</span>
+          <span class="tag">Client &amp; Stakeholder Comms</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section class="experience">
+    <div class="mark"><span class="label">Experience</span></div>
+    <div class="timeline">
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">Senior iOS Engineer</span>
+          <span class="job-company">DistrictCyber · Consulting Contract</span>
+          <span class="job-dates">Nov 2024 – Feb 2025</span>
+        </div>
+        <p class="job-summary">Short-term engagement focused on team enablement, codebase modernization, and hands-on delivery.</p>
+        <ul>
+          <li>Assessed the existing iOS codebase and shaped a practical refactoring plan focused on maintainability, clearer responsibilities, and reduced technical debt.</li>
+          <li>Guided the restructuring of key application components while contributing new functionality and improvements to existing features.</li>
+          <li>Mentored a junior iOS engineer through structured code reviews, technical discussions, and hands-on implementation support.</li>
+          <li>Introduced sustainable practices for code organization, testing, review, and feature delivery so the team could continue independently after the engagement.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">URLSession</span><span class="tag">XCTest</span>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">Senior iOS Engineer</span>
+          <span class="job-company">JetSoftPro</span>
+          <span class="job-dates">Jul 2023 – Sep 2024</span>
+        </div>
+        <p class="job-summary">Built DonorTap, an iOS point-of-sale app for charitable donations, from initial concept to release readiness.</p>
+        <ul>
+          <li>Co-developed the application from scratch in a cross-functional team of iOS, backend, design, and product specialists.</li>
+          <li>Took part in technical discovery and helped select the initial architecture, frameworks, dependency management, and CI/CD setup.</li>
+          <li>Translated an early payment-product concept into user stories, technical requirements, estimates, and engineering tasks.</li>
+          <li>Worked directly with the customer to clarify requirements, explain trade-offs, and align delivery with business priorities.</li>
+          <li>Implemented key product flows and secure handling of authentication and payment data, preparing the app for its first production release.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">MVVM</span><span class="tag">Tuist</span><span class="tag">Needle</span><span class="tag">Moya</span><span class="tag">Keychain Services</span><span class="tag">Xcode Cloud</span>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">Senior iOS Engineer</span>
+          <span class="job-company">Grid Dynamics</span>
+          <span class="job-dates">Oct 2020 – Feb 2023</span>
+        </div>
+        <p class="job-summary">Delivered and modernized functionality for large-scale retail apps including Macy's, Nike, and JCPenney.</p>
+
+        <div class="sub-client">Macy's</div>
+        <ul>
+          <li>Developed major shopping functionality related to product search and product preview experiences.</li>
+          <li>Contributed to refactoring and a gradual Objective-C-to-Swift migration in a large enterprise codebase.</li>
+          <li>Built proof-of-concept implementations for experimental features ahead of full-scale development.</li>
+          <li>Worked in a dedicated Scrum squad within an iOS org of ~20 engineers and presented work during client demos.</li>
+        </ul>
+
+        <div class="sub-client">Nike</div>
+        <ul>
+          <li>Implemented checkout functionality for the South Korean market, including region-specific address formats, validation rules, and customer-data fields.</li>
+          <li>Coordinated technical requirements with an external localized-address data provider and integrated it into the checkout flow.</li>
+        </ul>
+
+        <div class="sub-client">JCPenney</div>
+        <ul>
+          <li>Implemented analytics and A/B testing for home-screen components, supporting controlled experiments and reliable event tracking.</li>
+          <li>Mentored junior and middle engineers, took part in technical interviews, and contributed to architecture, estimation, and solution design.</li>
+        </ul>
+
+        <div class="job-tags">
+          <span class="tag">Swift</span><span class="tag">Objective-C</span><span class="tag">UIKit</span><span class="tag">SwiftUI</span><span class="tag">Combine</span><span class="tag">VIPER</span><span class="tag">Modular Architecture</span><span class="tag">Jenkins</span><span class="tag">XCTest</span><span class="tag">Instruments</span><span class="tag">AWS Amplify Analytics</span>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">iOS Engineer</span>
+          <span class="job-company">Hilditonn</span>
+          <span class="job-dates">Jul 2020 – Oct 2020</span>
+        </div>
+        <p class="job-summary">Contributed to a social networking app developed from the ground up.</p>
+        <ul>
+          <li>Developed feed functionality and flows for creating posts and publishing media content.</li>
+          <li>Used UIKit and AVFoundation for media presentation and handling, with attention to performance and memory usage for content-rich feeds.</li>
+          <li>Improved secure storage of sensitive app data with Keychain Services and added automated tests for critical flows.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag">Objective-C</span><span class="tag">UIKit</span><span class="tag">AVFoundation</span><span class="tag">Keychain Services</span>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">iOS Engineer</span>
+          <span class="job-company">Grid Dynamics</span>
+          <span class="job-dates">Nov 2019 – Jul 2020</span>
+        </div>
+        <p class="job-summary">Worked on product-detail functionality for the JCPenney mobile commerce app.</p>
+        <ul>
+          <li>Integrated True Fit technology to help customers choose suitable clothing sizes, adapting the experience to the app's design and architecture.</li>
+          <li>Collaborated with third-party developers to resolve integration issues and improve the visual presentation of recommendations.</li>
+          <li>Maintained more than 80% unit-test coverage for the modules under responsibility.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">True Fit</span><span class="tag">XCTest</span>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-role">Junior iOS Engineer → iOS Engineer</span>
+          <span class="job-company">DashDevs LLC</span>
+          <span class="job-dates">May 2018 – Nov 2019</span>
+        </div>
+        <ul>
+          <li>Reworked a horoscope app for a new product design and built paid functionality based on in-app purchases and subscriptions.</li>
+          <li>Built a reusable StoreKit framework for purchase handling, used across multiple company projects.</li>
+          <li>Developed functionality for a courier-facing delivery app and integrated backend APIs using Alamofire.</li>
+          <li>Investigated and resolved memory leaks, UI delays, and stability issues in legacy applications.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">StoreKit</span><span class="tag">Alamofire</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="education">
+    <div class="mark"><span class="label">Education &amp; Languages</span></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="eyebrow">Master's Degree, Computer Science</div>
+        <div class="title">Kharkiv National University of Radio Electronics</div>
+        <div class="sub">2013 – 2019</div>
+      </div>
+      <div class="edu-card">
+        <div class="eyebrow">Languages</div>
+        <div class="title">Ukrainian — Native</div>
+        <div class="sub">English — Professional working proficiency</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact">
+    <div class="mark"><span class="label">Contact</span></div>
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="traffic">
+          <span class="red"></span><span class="yellow"></span><span class="green"></span>
+        </div>
+        <span class="name">vlad@MacBook-Pro — zsh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">$</span><span class="term-cmd">open</span> <a href="mailto:vlad.arsenyuk@gmail.com">mailto:vlad.arsenyuk@gmail.com</a></div>
+        <div class="term-line"><span class="prompt">$</span><span class="term-cmd">call</span> <a href="tel:+380990555450">+380 99 055 5450</a></div>
+        <div class="term-line"><span class="prompt">$</span><span class="term-cmd">open</span> <a href="https://linkedin.com/in/vladyslav-arseniuk" target="_blank" rel="noopener">linkedin.com/in/vladyslav-arseniuk</a></div>
+        <div class="term-line"><span class="prompt">$</span><span class="term-cmd">open</span> <a href="https://t.me/vladarseniuk" target="_blank" rel="noopener">t.me/vladarseniuk</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="note">// end of file — thanks for reading</footer>
+
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    sections.forEach(s => observer.observe(s));
+  } else {
+    sections.forEach(s => s.classList.add('visible'));
+  }
+</script>
+
+</body>
+</html>
