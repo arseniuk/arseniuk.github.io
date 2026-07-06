@@ -332,6 +332,79 @@
   .skill-card:nth-of-type(4) h3{ color: var(--gold); }
   .skill-card:nth-of-type(5) h3{ color: var(--accent); }
 
+  /* ---------- Portfolio ---------- */
+  .portfolio-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .project-card{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 20px 18px;
+    transition: border-color 0.2s ease;
+  }
+
+  .project-card:hover{
+    border-color: var(--accent);
+  }
+
+  .project-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .project-icon{
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+  }
+
+  .project-link{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .project-link:hover{
+    border-color: var(--accent);
+  }
+
+  .project-name{
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+
+  .project-desc{
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+  }
+
+  .project-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
   /* ---------- Experience timeline ---------- */
   .timeline{
     position: relative;
@@ -631,11 +704,11 @@
     </div>
   </section>
 
-   <!-- ===================== PORTFOLIO ===================== -->
+  <!-- ===================== PORTFOLIO ===================== -->
   <section class="portfolio">
     <div class="mark"><span class="label">Portfolio</span></div>
     <div class="portfolio-grid">
- 
+
       <div class="project-card">
         <div class="project-top">
           <div class="project-icon">
@@ -658,7 +731,7 @@
           <span class="tag">Open Source</span>
         </div>
       </div>
- 
+
     </div>
   </section>
 
