@@ -158,6 +158,46 @@
     color: var(--border);
   }
 
+  .hero-contact{
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-contact-label{
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.hero-contact-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.contact-chip{
+  font-family: var(--mono);
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contact-chip:hover,
+.contact-chip:focus-visible{
+  border-color: var(--accent);
+  background: rgba(255, 138, 76, 0.08);
+}
+
   .code-body{
     display: grid;
     grid-template-columns: 36px 1fr;
@@ -611,6 +651,15 @@
         <span>Swift &amp; SwiftUI</span>
         <span class="meta-sep">/</span>
         <span>Available for contract &amp; full-time roles</span>
+      </div>
+      <div class="hero-contact">
+        <span class="hero-contact-label">Contact</span>
+          <div class="hero-contact-links">
+            <a class="contact-chip" href="mailto:vlad.arsenyuk@gmail.com">vlad.arsenyuk@gmail.com</a>
+            <a class="contact-chip" href="https://linkedin.com/in/vladyslav-arseniuk" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="contact-chip" href="tel:+380990555450">+380 99 055 5450</a>
+            <a class="contact-chip" href="https://t.me/vladarseniuk" target="_blank" rel="noopener">Telegram</a>
+          </div>
       </div>
     </div>
     <div class="statusbar">
